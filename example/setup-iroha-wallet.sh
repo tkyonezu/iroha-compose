@@ -66,27 +66,27 @@ tx CreateAsset 14 hotcoin test 5
 sleep 1
 rx GetAssetInformation 3 'hotcoin#test'
 
-tx AddAssetQuantity 16 admin@test 'coolcoin#test' 1000 0
+tx AddAssetQuantity 16 'coolcoin#test' 1000 0
 sleep 1
 rx GetAccountAsset 8 admin@test 'coolcoin#test'
 
-tx AddAssetQuantity 16 admin@test 'hotcoin#test' 1000 0
+tx AddAssetQuantity 16 'hotcoin#test' 1000 0
 sleep 1
 rx GetAccountAsset 8 admin@test 'hotcoin#test'
 
-tx TransferAsset 5 admin@test alice@test 'coolcoin#test' 50 2
+tx TransferAsset 5 admin@test alice@test 'coolcoin#test' 500.00
 sleep 1
 rx GetAccountAsset 8 alice@test 'coolcoin#test'
 
-tx TransferAsset 5 admin@test alice@test 'hotcoin#test' 50000 5
+tx TransferAsset 5 admin@test alice@test 'hotcoin#test' 500.00000
 sleep 1
-rx GetAccountAsset 8 alice@test 'hotcoint#test'
+rx GetAccountAsset 8 alice@test 'hotcoin#test'
 
-tx TransferAsset 5 admin@test bob@test 'coolcoin#test' 50 2
+tx TransferAsset 5 admin@test bob@test 'coolcoin#test' 500.00
 sleep 1
 rx GetAccountAsset 8 bob@test 'coolcoin#test'
 
-tx TransferAsset 5 admin@test bob@test 'hotcoin#test' 50000 5
+tx TransferAsset 5 admin@test bob@test 'hotcoin#test' 500.00000
 sleep 1
 rx GetAccountAsset 8 bob@test 'hotcoin#test'
 
