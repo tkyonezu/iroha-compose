@@ -8,8 +8,32 @@
                      {
                         "addPeer":{
                            "peer":{
-                              "address":"0.0.0.0:10001",
-                              "peerKey":"vd1YQE0TFeDrJ5AsXXyOsGAsFiOPAFdz30BrwZEwiSk="
+                              "address":"iroha-node1:10001",
+                              "peerKey":"oUe8/rsBVOEagZ8ZXpQGhCSy3XJov8GUgaVEou7Ljkw="
+                           }
+                        }
+                     },
+                     {
+                        "addPeer":{
+                           "peer":{
+                              "address":"iroha-node2:10001",
+                              "peerKey":"LMzaplqEitIC/u3EN31j8I9AM1TBPwQxBw4sYQW8wUQ="
+                           }
+                        }
+                     },
+                     {
+                        "addPeer":{
+                           "peer":{
+                              "address":"iroha-node3:10001",
+                              "peerKey":"L5bIY+vMGyfisM5KsKJRULRliglyHnmgr5I8jwg8nLU="
+                           }
+                        }
+                     },
+                     {
+                        "addPeer":{
+                           "peer":{
+                              "address":"iroha-node4:10001",
+                              "peerKey":"/jHXvC2+aVsc1ccG3ekC1ftubOS2DghBjIQv3vWAUjA="
                            }
                         }
                      },
@@ -32,8 +56,7 @@
                               "can_get_roles",
                               "can_read_assets",
                               "can_remove_signatory",
-                              "can_set_quorum",
-                              "can_append_role"
+                              "can_set_quorum"
                            ]
                         }
                      },
