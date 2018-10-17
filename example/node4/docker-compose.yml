@@ -1,0 +1,117 @@
+# Copyright Takeshi Yonezu. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '3'
+
+services:
+
+  node1:
+    image: hyperledger/${IROHA_IMG}
+    container_name: iroha-node1
+    ports:
+      - "50051:50051"
+    environment:
+      - CCACHE_DIR=/tmp/ccache
+    volumes:
+      - ${PWD}:/opt/iroha/config
+      - ${PWD}/block_store1:/tmp/block_store
+      - ccache-data:/tmp/ccache
+    working_dir: /opt/iroha
+    entrypoint: >
+      bash -c "sleep 10;
+      /usr/bin/irohad --config config/iroha1.conf
+      --genesis_block config/genesis.block
+      --keypair_name config/node1
+      --overwrite_ledger"
+    depends_on:
+      - postgres1
+
+  node2:
+    image: hyperledger/${IROHA_IMG}
+    container_name: iroha-node2
+    environment:
+      - CCACHE_DIR=/tmp/ccache
+    volumes:
+      - ${PWD}:/opt/iroha/config
+      - ${PWD}/block_store2:/tmp/block_store
+      - ccache-data:/tmp/ccache
+    working_dir: /opt/iroha
+    entrypoint: >
+      bash -c "sleep 10;
+      /usr/bin/irohad --config config/iroha2.conf
+      --genesis_block config/genesis.block
+      --keypair_name config/node2
+      --overwrite_ledger"
+    depends_on:
+      - postgres2
+
+  node3:
+    image: hyperledger/${IROHA_IMG}
+    container_name: iroha-node3
+    environment:
+      - CCACHE_DIR=/tmp/ccache
+    volumes:
+      - ${PWD}:/opt/iroha/config
+      - ${PWD}/block_store3:/tmp/block_store
+      - ccache-data:/tmp/ccache
+    working_dir: /opt/iroha
+    entrypoint: >
+      bash -c "sleep 10;
+      /usr/bin/irohad --config config/iroha3.conf
+      --genesis_block config/genesis.block
+      --keypair_name config/node3
+      --overwrite_ledger"
+    depends_on:
+      - postgres3
+
+  node4:
+    image: hyperledger/${IROHA_IMG}
+    container_name: iroha-node4
+    environment:
+      - CCACHE_DIR=/tmp/ccache
+    volumes:
+      - ${PWD}:/opt/iroha/config
+      - ${PWD}/block_store4:/tmp/block_store
+      - ccache-data:/tmp/ccache
+    working_dir: /opt/iroha
+    entrypoint: >
+      bash -c "sleep 10;
+      /usr/bin/irohad --config config/iroha4.conf
+      --genesis_block config/genesis.block
+      --keypair_name config/node4
+      --overwrite_ledger"
+    depends_on:
+      - postgres4
+
+  postgres1:
+    image: postgres:9.5
+    container_name: iroha-postgres1
+    environment:
+      - POSTGRES_USER=iroha
+      - POSTGRES_PASSWORD=HelloW0rld
+
+  postgres2:
+    image: postgres:9.5
+    container_name: iroha-postgres2
+    environment:
+      - POSTGRES_USER=iroha
+      - POSTGRES_PASSWORD=HelloW0rld
+
+  postgres3:
+    image: postgres:9.5
+    container_name: iroha-postgres3
+    environment:
+      - POSTGRES_USER=iroha
+      - POSTGRES_PASSWORD=HelloW0rld
+
+  postgres4:
+    image: postgres:9.5
+    container_name: iroha-postgres4
+    environment:
+      - POSTGRES_USER=iroha
+      - POSTGRES_PASSWORD=HelloW0rld
+
+volumes:
+  ccache-data:
