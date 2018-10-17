@@ -32,8 +32,7 @@
                               "can_get_roles",
                               "can_read_assets",
                               "can_remove_signatory",
-                              "can_set_quorum",
-                              "can_append_role"
+                              "can_set_quorum"
                            ]
                         }
                      },
