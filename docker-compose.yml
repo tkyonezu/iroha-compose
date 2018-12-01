@@ -8,6 +8,7 @@ version: '3'
 services:
   node:
     image: hyperledger/${IROHA_IMG}
+    container_name: iroha-node1
     ports:
       - "50051:50051"
     environment:
@@ -27,6 +28,7 @@ services:
 
   postgres:
     image: postgres:9.5
+    container_name: iroha-postgres1
     environment:
       - POSTGRES_USER=iroha
       - POSTGRES_PASSWORD=HelloW0rld
