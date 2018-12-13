@@ -20,7 +20,7 @@ services:
       - ccache-data:/tmp/ccache
     working_dir: /opt/iroha
     command: >
-      bash -c "sleep 20;
+      bash -c "sleep 30;
       /opt/iroha/bin/irohad --config config/iroha1.conf
       --genesis_block config/genesis.block
       --keypair_name config/node1"
