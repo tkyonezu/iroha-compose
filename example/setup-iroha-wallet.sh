@@ -1,9 +1,9 @@
 #!/bin/bash
 # 
-# Copyright (c) 2018, Takeshi Yonezu. All Rights Reserved.
+# Copyright (c) 2018, 2019, Takeshi Yonezu. All Rights Reserved.
 #
 
-CONTAINER_NAME="iroha-node1"
+CONTAINER_NAME="iroha_node_1"
 
 IROHA_IP=0.0.0.0
 IROHA_PORT=50051
@@ -14,7 +14,7 @@ function tx {
   docker exec -i ${CONTAINER_NAME} iroha-cli \
     --account_name admin@test \
     --key_path /opt/iroha/config \
-    <<EOF | grep -E '(2018|^Congratulation|^Its)' | sed 's/^>.*: //' | tee /tmp/hash
+    <<EOF | grep -E '(^\[20|^Congratulation|^Its)' | sed 's/^>.*: //' | tee /tmp/hash
 tx
 $2
 $3
@@ -29,8 +29,16 @@ ${IROHA_PORT}
 EOF
 
   hash=$(cat /tmp/hash| grep hash | cut -d' ' -f4)
-  while st $hash | grep -q "A problem"; do
-   sleep 1
+  st $hash >/tmp/st
+  while ! cat /tmp/st | grep -q "successfully committed"; do
+    if cat /tmp/st | grep -q "error"; then
+      echo
+      cat /tmp/st | grep "error" | sed 's/^>.*: //'
+      break
+    fi
+    sleep 1
+    echo -n "."
+    st $hash >/tmp/st
   done
 }
 
@@ -40,7 +48,7 @@ function rx {
   docker exec -i ${CONTAINER_NAME} iroha-cli \
     --account_name admin@test \
     --key_path /opt/iroha/config \
-    <<EOF | grep -E '(2018|^Congratulation|^Its)' | sed 's/^>.*: //'
+    <<EOF | grep -E '(^\[20|^Congratulation|^Its)' | sed 's/^>.*: //'
 qry
 $2
 $3
