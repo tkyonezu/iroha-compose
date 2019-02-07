@@ -1,5 +1,3 @@
-# Copyright Takeshi Yonezu. All Rights Reserved.
-#
 # SPDX-License-Identifier: Apache-2.0
 #
 
@@ -8,27 +6,22 @@ version: '3'
 services:
   node:
     image: hyperledger/${IROHA_IMG}
-    container_name: iroha-node1
     ports:
       - "50051:50051"
     environment:
-      - key=node0
+      - KEY=node0
+      - IROHA_POSTGRES_HOST=iroha_postgres_1
+      - IROHA_POSTGRES_PORT=5432
       - CCACHE_DIR=/tmp/ccache
     volumes:
       - ${PWD}/example:/opt/iroha/config
       - ccache-data:/tmp/ccache
-    working_dir: /opt/iroha
-    entrypoint: >
-      bash -c "sleep 10;
-      /usr/bin/irohad --config config/iroha.conf
-      --genesis_block config/genesis.block
-      --keypair_name config/node0"
+    working_dir: /opt/iroha/config
     depends_on:
       - postgres
 
   postgres:
     image: postgres:9.5
-    container_name: iroha-postgres1
     environment:
       - POSTGRES_USER=iroha
       - POSTGRES_PASSWORD=HelloW0rld
