@@ -1,6 +1,7 @@
 #!/bin/bash
 # 
-# Copyright (c) 2018, 2019, Takeshi Yonezu. All Rights Reserved.
+# Copyright (c) 2018-2019 Takeshi Yonezu
+# All Rights Reserved.
 #
 
 CONTAINER_NAME="iroha_node_1"

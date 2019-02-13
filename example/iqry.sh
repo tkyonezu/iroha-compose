@@ -1,6 +1,7 @@
 #!/bin/bash
 # 
-# Copyright (c) 2018, 2019, Takeshi Yonezu. All Rights Reserved.
+# Copyright (c) 2018-2019 Takeshi Yonezu
+# All Rights Reserved.
 #
 
 IROHA_IP=127.0.0.1
