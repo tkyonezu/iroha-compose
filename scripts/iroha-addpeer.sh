@@ -30,8 +30,7 @@ else
 fi
 
 cat docker-compose.yml.in |
-  sed -e "s/IROHA_NODEKEY=.*/IROHA_NODEKEY=${IROHA_NODEKEY}/" \
-      -e "s/IROHA_GENESIS=.*/IROHA_GENESIS=genesis.block/" >docker-compose.yml
+  sed -e "s/IROHA_NODEKEY=.*/IROHA_NODEKEY=${IROHA_NODEKEY}/" >docker-compose.yml
 
 echo "$ docker-compose -f docker-compose.yml up -d"
 docker-compose -f docker-compose.yml up -d
