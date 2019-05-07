@@ -11,13 +11,15 @@ services:
     image: ${IROHA_ARC}/${IROHA_IMG}
     ports:
       - "50051:50051"
+      - "10001:10001"
     environment:
       - KEY=node0
       - IROHA_POSTGRES_HOST=iroha_postgres_1
       - IROHA_POSTGRES_PORT=5432
       - CCACHE_DIR=/tmp/ccache
     volumes:
-      - ${PWD}/example:/opt/iroha/config
+      - ${PWD}:/opt/iroha/config
+      - ${PWD}/block_store:/tmp/block_store
       - ccache-data:/tmp/ccache
     working_dir: /opt/iroha/config
     depends_on:
