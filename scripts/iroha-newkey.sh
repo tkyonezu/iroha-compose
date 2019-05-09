@@ -11,10 +11,10 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
-docker exec -i iroha_node_1 iroha-cli --new_account --account_name $1
-
-if [ -d example/multi-node ]; then
-  mv example/$1.* example/multi-node
-fi
+docker run --rm \
+  -v $(pwd)/example/multi-node:/opt/iroha/config \
+  --entrypoint iroha-cli \
+  hyperledger/iroha-pi \
+  --new_account --account_name $1
 
 exit 0
