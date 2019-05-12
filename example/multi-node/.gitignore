@@ -1,3 +1,4 @@
 !.env
 /block_store/*
+genesis.block
 docker-compose.yml
