@@ -53,8 +53,6 @@ PEERS=$(grep address genesis.block | sed 's/.*address":"/    /' | sed 's/",//')
 echo "Peers:"
 echo "${PEERS}"
 
-exit 0
-
 cat docker-compose.yml.in |
   sed -e "s/IROHA_NODEKEY=.*/IROHA_NODEKEY=${1}/" >docker-compose.yml
 
