@@ -49,12 +49,26 @@ rm -f block_store/0*
 cat docker-compose.yml.in |
   sed -e "s/KEY=.*/KEY=${1}/" >docker-compose.yml
 
+if [ "$(uname -s)" = "Darwin" ]; then
+  sed -i '' "s/user:.*/user: $(id -u):$(id -g)" docker-compose.yml
+else
+  sed -i "s/user:.*/user: $(id -u):$(id -g)" docker-compose.yml
+fi
+
 echo "Current node:"
 echo "    $(grep KEY docker-compose.yml | sed 's/.*KEY=//')"
 
 PEERS=$(grep address genesis.block | sed 's/.*address":"/    /' | sed 's/",//')
 echo "Peers:"
 echo "${PEERS}"
+
+if [ ! -d block_store ]; then
+  echo "$ mkdir block_store"
+  mkdir block_store
+
+  echo "$ sudo chown $(id -u):$(id -g) block_store"
+  sudo chown $(id -u):$(id -g) block_store
+fi
 
 echo "$ docker-compose -f docker-compose.yml up -d"
 docker-compose -f docker-compose.yml up -d
