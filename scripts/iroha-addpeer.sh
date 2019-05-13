@@ -50,9 +50,9 @@ cat docker-compose.yml.in |
   sed -e "s/KEY=.*/KEY=${1}/" >docker-compose.yml
 
 if [ "$(uname -s)" = "Darwin" ]; then
-  sed -i '' "s/user:.*/user: $(id -u):$(id -g)" docker-compose.yml
+  sed -i '' "s/user:.*/user: \"$(id -u):$(id -g)\"/" docker-compose.yml
 else
-  sed -i "s/user:.*/user: $(id -u):$(id -g)" docker-compose.yml
+  sed -i "s/user:.*/user: \"$(id -u):$(id -g)\"/" docker-compose.yml
 fi
 
 echo "Current node:"
