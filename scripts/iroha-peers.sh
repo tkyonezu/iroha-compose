@@ -13,6 +13,11 @@ if [ $# -lt 4 ]; then
   exit 1
 fi
 
+if [ ! -f ${GENESIS_BLOCK}.in ]; then
+  echo "${GENESIS_BLOCK}.in file not found!"
+  exit 1
+fi
+
 cat ${GENESIS_BLOCK}.in |
   sed -e "s/IP1/$1/" -e "s/IP2/$2/" -e "s/IP3/$3/" -e "s/IP4/$4/" >${GENESIS_BLOCK}
 

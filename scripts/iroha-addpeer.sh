@@ -16,6 +16,11 @@ if [ $# -eq 0 ]; then
   usage
 fi
 
+if [ ! -d example/multi-node ]; then
+  echo "example/multi-node directory not found!"
+  exit 1
+fi
+
 cd example/multi-node
 
 case "$1" in

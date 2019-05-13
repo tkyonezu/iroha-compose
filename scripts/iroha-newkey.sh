@@ -11,12 +11,20 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
+if [ ! -f .env ]; then
+  echo ".env file not found!"
+  exit 1
+fi
+
+eval $(grep IROHA_ARC .env)
+eval $(grep IROHA_IMG .env)
+
 docker run --rm \
   -v $(pwd)/example/multi-node:/opt/iroha/config \
   --entrypoint iroha-cli \
   --user "$(id -u):$(id -g)" \
   --workdir /opt/iroha/config \
-  hyperledger/iroha \
+  ${IROHA_ARC}/${IROHA_IMG} \
   --new_account --account_name $1
 
 exit 0
