@@ -14,7 +14,7 @@ fi
 docker run --rm \
   -v $(pwd)/example/multi-node:/opt/iroha/config \
   --entrypoint iroha-cli \
-  --user $(id -u):$(id -g) \
+  --user "$(id -u):$(id -g)" \
   --workdir /opt/iroha/config \
   hyperledger/iroha \
   --new_account --account_name $1
