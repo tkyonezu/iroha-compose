@@ -14,7 +14,7 @@ fi
 docker run --rm \
   -v $(pwd)/example/multi-node:/opt/iroha/config \
   --entrypoint iroha-cli \
-  hyperledger/iroha-pi \
+  hyperledger/iroha \
   --new_account --account_name $1
 
 exit 0
