@@ -47,10 +47,10 @@ echo "$ rm -f block_store/0*"
 rm -f block_store/0*
 
 cat docker-compose.yml.in |
-  sed -e "s/IROHA_NODEKEY=.*/IROHA_NODEKEY=${1}/" >docker-compose.yml
+  sed -e "s/KEY=.*/KEY=${1}/" >docker-compose.yml
 
 echo "Current node:"
-echo "    $(grep IROHA_NODEKEY docker-compose.yml | sed 's/.*IROHA_NODEKEY=//')"
+echo "    $(grep KEY docker-compose.yml | sed 's/.*KEY=//')"
 
 PEERS=$(grep address genesis.block | sed 's/.*address":"/    /' | sed 's/",//')
 echo "Peers:"
