@@ -8,18 +8,20 @@ version: '3'
 
 services:
   node:
-    image: ${IROHA_ARC}/${IROHA_IMG}
+    image: ${IROHA_PRJ}/${IROHA_IMG}
     ports:
       - "50051:50051"
+    user: "1000:1000"
     environment:
-      - KEY=node0
-      - IROHA_POSTGRES_HOST=iroha_postgres_1
-      - IROHA_POSTGRES_PORT=5432
+      - IROHA_HOME=/opt/iroha
+      - IROHA_CONF=config.docker
+      - IROHA_NODEKEY=node0
       - CCACHE_DIR=/tmp/ccache
     volumes:
       - ${PWD}/example:/opt/iroha/config
       - ccache-data:/tmp/ccache
     working_dir: /opt/iroha/config
+    entrypoinnt: /opt/iroha/config/entrypoint.sh
     depends_on:
       - postgres
 
