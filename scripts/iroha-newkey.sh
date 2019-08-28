@@ -16,7 +16,7 @@ if [ ! -f .env ]; then
   exit 1
 fi
 
-eval $(grep IROHA_ARC .env)
+eval $(grep IROHA_PRJ .env)
 eval $(grep IROHA_IMG .env)
 
 docker run --rm \
@@ -24,7 +24,7 @@ docker run --rm \
   --entrypoint iroha-cli \
   --user "$(id -u):$(id -g)" \
   --workdir /opt/iroha/config \
-  ${IROHA_ARC}/${IROHA_IMG} \
+  ${IROHA_PRJ}/${IROHA_IMG} \
   --new_account --account_name $1
 
 exit 0
