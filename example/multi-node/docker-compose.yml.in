@@ -16,14 +16,15 @@ services:
     environment:
       - IROHA_HOME=/opt/iroha
       - IROHA_CONF=config.docker
-      - IROHA_NODEKEY=node0
+      - IROHA_POSTGRES_HOST=iroha_postgres_1
+      - IROHA_POSTGRES_PORT=5432
+      - KEY=node0
       - CCACHE_DIR=/tmp/ccache
     volumes:
       - ${PWD}:/opt/iroha/config
       - ${PWD}/block_store:/tmp/block_store
       - ccache-data:/tmp/ccache
     working_dir: /opt/iroha/config
-    entrypoint: /opt/iroha/config/entrypoint.sh
     depends_on:
       - postgres
 
