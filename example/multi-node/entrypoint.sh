@@ -22,7 +22,10 @@ fi
 
 # Raspberry Pi, Wait until PostgreSQL is stabilized
 if [ "$(uname -m)" = "armv7l" ]; then
-  sleep 30
+  # Raspberry Pi 4B does'nt need sleep
+  if ! grep ^Model /proc/cpuinfo | grep -q "Raspberry Pi 4"; then
+    sleep 30
+  fi
 fi
 
 if [ -f ${IROHA_BLOCK}0000000000000002 ]; then
