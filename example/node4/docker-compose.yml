@@ -87,7 +87,7 @@ services:
       - postgres3
 
   postgres0:
-    image: postgres:9.5
+    image: postgres:12.1
     container_name: iroha-postgres0
     restart: always
     environment:
@@ -95,7 +95,7 @@ services:
       - POSTGRES_PASSWORD=HelloW0rld
 
   postgres1:
-    image: postgres:9.5
+    image: postgres:12.1
     container_name: iroha-postgres1
     restart: always
     environment:
@@ -103,7 +103,7 @@ services:
       - POSTGRES_PASSWORD=HelloW0rld
 
   postgres2:
-    image: postgres:9.5
+    image: postgres:12.1
     container_name: iroha-postgres2
     restart: always
     environment:
@@ -111,7 +111,7 @@ services:
       - POSTGRES_PASSWORD=HelloW0rld
 
   postgres3:
-    image: postgres:9.5
+    image: postgres:12.1
     container_name: iroha-postgres3
     restart: always
     environment:
