@@ -9,6 +9,7 @@ version: '3'
 services:
   node:
     image: ${IROHA_PRJ}/${IROHA_IMG}
+    restart: always
     user: "1000:1000"
     ports:
       - "50051:50051"
@@ -30,6 +31,7 @@ services:
 
   postgres:
     image: postgres:12.1
+    restart: always
     environment:
       - POSTGRES_USER=iroha
       - POSTGRES_PASSWORD=HelloW0rld
