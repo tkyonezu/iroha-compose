@@ -1,19 +1,14 @@
 #!/bin/sh
 
-#
-# Copyright (c) 2017-2019 Takeshi Yonezu
-# All Rights Reserved.
-#
-# SPDX-License-Identifier: Apache-2.0
-#
-
-IROHA_NODE="iroha-node"
+IROHA_NODE="iroha_node_"
 TTY="/dev/pts/"
-
 
 if [ "$(uname -s)" = "Darwin" ]; then
   N=$(w -h | wc -l)
-  w -h | sed '/ console /d' >/tmp/ilogs.$$
+
+  w -h >/tmp/i.$$
+  cat /tmp/i.$$ | grep -v console >/tmp/ilogs.$$
+  rm /tmp/i.$$
 
   TTY="/dev/tty"
 else
@@ -28,7 +23,7 @@ fi
 for i in $(seq ${N}); do
   NAME=$(cat /tmp/ilogs.$$ | sed -n ${i}p | awk '{ print $2 }')
 
-  docker logs -f iroha-node$((i-1)) >${TTY}${NAME} &
+  docker logs -f ${IROHA_NODE}$((i)) >${TTY}${NAME} &
 done
 
 rm /tmp/ilogs.$$

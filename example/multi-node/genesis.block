@@ -9,7 +9,7 @@
                 {
                   "addPeer":{
                     "peer":{
-                      "address":"192.168.0.111:10001",
+                      "address":"IP1:10001",
                       "peerKey":"a147bcfebb0154e11a819f195e94068424b2dd7268bfc19481a544a2eecb8e4c"
                     }
                   }
@@ -17,7 +17,7 @@
                 {
                   "addPeer":{
                     "peer":{
-                      "address":"192.168.0.112:10001",
+                      "address":"IP2:10001",
                       "peerKey":"2cccdaa65a848ad202feedc4377d63f08f403354c13f0431070e2c6105bcc144"
                     }
                   }
@@ -25,7 +25,7 @@
                 {
                   "addPeer":{
                     "peer":{
-                      "address":"192.168.0.113:10001",
+                      "address":"IP3:10001",
                       "peerKey":"2f96c863ebcc1b27e2b0ce4ab0a25150b4658a09721e79a0af923c8f083c9cb5"
                     }
                   }
@@ -33,7 +33,7 @@
                 {
                   "addPeer":{
                     "peer":{
-                      "address":"192.168.0.114:10001",
+                      "address":"IP4:10001",
                       "peerKey":"fe31d7bc2dbe695b1cd5c706dde902d5fb6e6ce4b60e08418c842fdef5805230"
                     }
                   }
