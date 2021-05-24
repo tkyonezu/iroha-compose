@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) 2017-2019 Takeshi Yonezu
+# Copyright (c) 2017-2021 Takeshi Yonezu
 # All Rights Reserved.
 
 cd ${IROHA_HOME}/config
@@ -9,7 +9,7 @@ IROHA_CONF=${IROHA_CONF:-iroha.conf}
 IROHA_BLOCK=$(cat ${IROHA_CONF} | grep block_store_path |
   sed -e 's/^.*: "//' -e 's/".*$//')
 IROHA_GENESIS=${IROHA_GENESIS:-genesis.block}
-IROHA_NODEKEY=${IROHA_NODEKEY:-node0}
+IROHA_NODEKEY=${IROHA_NODEKEY:-node1}
 
 if grep -q pg_opt ${IROHA_CONF}; then
   PG_HOST=$(cat ${IROHA_CONF} | grep pg_opt | sed -e 's/^.*host=//' -e 's/ .*//')
@@ -19,11 +19,13 @@ else
   PG_PORT=$(cat ${IROHA_CONF} | grep "[^_]port" | sed -e 's/^.*port" *: *//' -e 's/,.*//')
 fi
 
-if [ -x /wait-for-it.sh ]; then
-  /wait-for-it.sh -h ${PG_HOST} -p ${PG_PORT} -t 60 -- true
+if [ -x ${IROHA_HOME}/bin/wait-for-it.sh ]; then
+  WAIT_FOR_IT="${IROHA_HOME}/bin/wait-for-it.sh"
 else
-  /opt/iroha/bin/wait-for-it.sh -h ${PG_HOST} -p ${PG_PORT} -t 60 -- true
+  WAIT_FOR_IT="/wait-for-it.sh"
 fi
+
+${WAIT_FOR_IT} -h ${PG_HOST} -p ${PG_PORT} -t 60 -- true
 
 # Raspberry Pi, Wait until PostgreSQL is stabilized
 if [ "$(uname -m)" = "armv7l" ]; then
@@ -33,15 +35,22 @@ if [ "$(uname -m)" = "armv7l" ]; then
   fi
 fi
 
-if [ -f ${IROHA_BLOCK}0000000000000002 ]; then
-  echo "$ irohad --config ${IROHA_CONF} --keypair_name ${IROHA_NODEKEY}"
+if [ ! -f ${IROHA_BLOCK}0000000000000001 ]; then
+  echo "$ irohad --config ${IROHA_CONF} --genesis_block ${IROHA_GENESIS} --keypair_name ${IROHA_NODEKEY} --drop_state"
 
   irohad --config ${IROHA_CONF} \
-    --keypair_name ${IROHA_NODEKEY}
-else
+    --genesis_block ${IROHA_GENESIS} \
+    --keypair_name ${IROHA_NODEKEY} \
+    --drop_state
+elif [ ! -f ${IROHA_BLOCK}0000000000000002 ]; then
   echo "$ irohad --config ${IROHA_CONF} --genesis_block ${IROHA_GENESIS} --keypair_name ${IROHA_NODEKEY}"
 
   irohad --config ${IROHA_CONF} \
     --genesis_block ${IROHA_GENESIS} \
+    --keypair_name ${IROHA_NODEKEY}
+else
+  echo "$ irohad --config ${IROHA_CONF} --keypair_name ${IROHA_NODEKEY}"
+
+  irohad --config ${IROHA_CONF} \
     --keypair_name ${IROHA_NODEKEY}
 fi
