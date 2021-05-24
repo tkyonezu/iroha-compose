@@ -1,4 +1,2 @@
-!.env
-/block_store/*
+iroha1/
 genesis.block
-docker-compose.yml
