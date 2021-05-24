@@ -18,7 +18,7 @@ services:
       - IROHA_CONF=config.docker
       - IROHA_POSTGRES_HOST=iroha_postgres_1
       - IROHA_POSTGRES_PORT=5432
-      - KEY=node1
+      - IROHA_NODEKEY=node1
       - CCACHE_DIR=/tmp/ccache
     volumes:
       - ${PWD}:/opt/iroha/config
