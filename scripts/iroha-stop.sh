@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-for peer in senzu8.local senta11.local iroha.local raspi.local; do
+for peer in iroha1 iroha2 iroha3 iroha4; do
   echo "$ ssh ${peer} docker compose down -v"
   ssh ${peer} "(cd github.com/tkyonezu/iroha-compose/example/multi-node; docker-compose down -v)"
 done
