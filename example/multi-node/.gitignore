@@ -1,2 +1,3 @@
-iroha1/
+!.env
+/iroha/
 genesis.block
