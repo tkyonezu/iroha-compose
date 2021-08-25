@@ -29,7 +29,7 @@ services:
       - postgres
 
   postgres:
-    image: postgres:13.2-alpine
+    image: postgres:13-alpine
     restart: always
     environment:
       - POSTGRES_USER=iroha
