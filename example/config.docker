@@ -3,6 +3,7 @@
   "torii_port" : 50051,
   "internal_port" : 10001,
   "database" : {
+    "type": "postgres",
     "host" : "iroha_postgres_1",
     "port" : 5432,
     "user" : "iroha",
@@ -16,5 +17,6 @@
   "mst_enable" : false,
   "mst_expiration_time" : 1440,
   "max_rounds_delay" : 3000,
-  "stale_stream_max_rounds" : 2
+  "stale_stream_max_rounds" : 2,
+  "metrics": "127.0.0.1:8080"
 }
