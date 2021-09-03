@@ -1,15 +1,9 @@
 {
-  "block_store_path" : "/tmp/block_store/",
   "torii_port" : 50051,
   "internal_port" : 10001,
   "database" : {
-    "type": "postgres",
-    "host" : "iroha_postgres_1",
-    "port" : 5432,
-    "user" : "iroha",
-    "password" : "HelloW0rld",
-    "working database" : "iroha_default",
-    "maintenance database" : "postgres"
+    "type": "rocksdb",
+    "path": "/tmp/wsv"
   },
   "max_proposal_size" : 10,
   "proposal_delay" : 5000,
