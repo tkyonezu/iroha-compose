@@ -7,7 +7,7 @@
 #
 
 if [ $# -lt 1 ]; then
-  echo "Usage: iroha-newaccount {<account_name>|<node_name>}"
+  echo "Usage: iroha-newkey {<account_name>|<node_name>}"
   exit 1
 fi
 
