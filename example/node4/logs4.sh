@@ -1,6 +1,13 @@
 #!/bin/sh
 
-IROHA_NODE="iroha_node_"
+#
+# Copyright (c) 2017-2021 Takeshi Yonezu
+# All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+IROHA_NODE="iroha-node-"
 TTY="/dev/pts/"
 
 if [ "$(uname -s)" = "Darwin" ]; then
@@ -22,6 +29,10 @@ fi
 
 for i in $(seq ${N}); do
   NAME=$(cat /tmp/ilogs.$$ | sed -n ${i}p | awk '{ print $2 }')
+
+  if uname -r | grep -q "microsoft-.*-WSL2"; then
+    NAMR=$((NAME+=2))
+  fi
 
   docker logs -f ${IROHA_NODE}$((i)) >${TTY}${NAME} &
 done

@@ -7,6 +7,6 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-sudo rm -fr iroha/
+sudo rm -fr iroha1/
 
 exit 0
